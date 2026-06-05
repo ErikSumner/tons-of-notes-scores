@@ -1,0 +1,11 @@
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/abcjs@6/dist/abcjs-basic-min.js"></script>
+</head>
+<body>
+  <div id="notation"></div>
+  <script>
+    ABCJS.renderAbc("notation", "X:1\nT:Test\nM:4/4\nK:C\nCDEF GABc|");
+  </script>
+</body>
+</html>
