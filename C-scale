@@ -1,11 +1,38 @@
-<html>
-<head>
-  <script src="https://cdn.jsdelivr.net/npm/abcjs@6/dist/abcjs-basic-min.js"></script>
-</head>
-<body>
-  <div id="notation"></div>
-  <script>
-    ABCJS.renderAbc("notation", "X:1\nT:Test\nM:4/4\nK:C\nCDEF GABc|");
-  </script>
-</body>
-</html>
+<style>
+html::before {
+  content: 'CodePen ♥ The Web';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  font-family: monospace;
+  opacity: 0.6;
+  background: rebeccapurple;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/abcjs@6/dist/abcjs-basic-min.js"></script>
+<div id="notation"></div>
+<script>
+ABCJS.renderAbc("notation", `X:1
+T:Basics in C Major
+M:none
+L:1
+K:C
+"^The Scale"CDEF GABc |
+%%vskip 20
+"^The Scale in Thirds"[CE][DF][EG][FA][GB][Ac][Bd][ce] |
+%%vskip 20
+"^Root-Position Diatonic Triads in C"[CEG][DFA][EGB][FAc][GBd][Ace][Bdf][ceg]|
+%%vskip 20
+"^First-Inversion Diatonic Triads in C"[EGc][FAd][GBe][Acf][Bdg][cea][dfb][egc']|
+%%vskip 20
+"^Second-Inversion Diatonic Triads in C"[Gce][Adf][Beg][cfa][dgb][eac'][fbd'][gc'e']|
+%%vskip 20
+"^Diatonic 7th-Chords in C"[CEGB][DFAc][EGBd][FAce][GBdf][Aceg][Bdfa][cegb]|`);
+</script>
