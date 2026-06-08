@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VexFlow Test – C Major Scale</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background: #fdfaf6;
+      color: #222;
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+    p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 28px;
+    }
+    #score {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 24px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>C Major Scale</h1>
+  <p>Rendered with VexFlow on GitHub Pages.</p>
+
+  <div id="score"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vexflow@4/build/cjs/vexflow.js"></script>
+  <script>
+    const { Renderer, Stave, StaveNote, Voice, Formatter, Beam } = Vex.Flow;
+
+    // Set up the renderer targeting the #score div
+    const div = document.getElementById("score");
+    const renderer = new Renderer(div, Renderer.Backends.SVG);
+    renderer.resize(560, 160);
+
+    const context = renderer.getContext();
+    context.setFont("Arial", 10);
+
+    // Create a stave at position (20, 20) with width 520
+    const stave = new Stave(20, 20, 520);
+    stave.addClef("treble").addTimeSignature("4/4").addKeySignature("C");
+    stave.setContext(context).draw();
+
+    // C major scale: two groups of 4 quarter notes
+    const noteData = [
+      { keys: ["c/4"], duration: "q" },
+      { keys: ["d/4"], duration: "q" },
+      { keys: ["e/4"], duration: "q" },
+      { keys: ["f/4"], duration: "q" },
+      { keys: ["g/4"], duration: "q" },
+      { keys: ["a/4"], duration: "q" },
+      { keys: ["b/4"], duration: "q" },
+      { keys: ["c/5"], duration: "q" },
+    ];
+
+    const notes = noteData.map(n => new StaveNote(n));
+
+    // Two beamed groups (or just leave as quarter notes — no beam needed)
+    // Quarter notes don't beam, so we just format and draw
+
+    const voice = new Voice({ num_beats: 4, beat_value: 4 }).setMode(Voice.Mode.SOFT);
+    // Split across two measures would be ideal, but for a single-stave demo
+    // we'll use SOFT mode to allow 8 beats
+    voice.addTickables(notes);
+
+    new Formatter().joinVoices([voice]).format([voice], 460);
+    voice.draw(context, stave);
+  </script>
+
+</body>
+</html>
